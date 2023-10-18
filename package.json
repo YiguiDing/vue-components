@@ -5,20 +5,32 @@
   "homepage": "https://dingdingdang.online",
   "version": "0.0.0",
   "type": "module",
+  "main": "lib/index.js",
+  "style": "lib/index.css",
+  "types": "types/index.d.ts",
   "exports": {
-    ".": "./",
-    "./components": "./src/components/index.ts",
-    "./layouts": "./src/layouts/index.ts"
+    ".": {
+      "import": "./lib/index.js",
+      "types": "./types/index.d.ts"
+    },
+    "./components/": "./src/components/",
+    "./layouts/": "./src/layouts/"
   },
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
+    "build:lib": "npm run build:es && npm run build:dts",
+    "build:es": "vite build --emptyOutDir --config ./scripts/build.es.ts",
+    "build:dts": "vue-tsc --declaration --emitDeclarationOnly -p tsconfig.build.json",
     "commitizen_init": "commitizen init cz-conventional-changelog --save --save-exact",
     "commit": "git cz"
   },
   "dependencies": {
+    "@rollup/plugin-terser": "^0.4.4",
+    "@vitejs/plugin-vue-jsx": "^3.0.2",
     "commitizen": "^4.3.0",
+    "execa": "^8.0.1",
     "less": "^4.2.0",
     "prettier": "^3.0.3",
     "vue": "^3.3.4"
@@ -28,7 +40,7 @@
     "cz-conventional-changelog": "^3.3.0",
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
-    "vue-tsc": "^1.8.5"
+    "vue-tsc": "^1.8.19"
   },
   "config": {
     "commitizen": {
