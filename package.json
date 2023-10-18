@@ -13,6 +13,7 @@
       "import": "./lib/index.js",
       "types": "./types/index.d.ts"
     },
+    "./style.css": "./lib/index.css",
     "./components/": "./src/components/",
     "./layouts/": "./src/layouts/"
   },
@@ -27,17 +28,17 @@
     "commit": "git cz"
   },
   "dependencies": {
-    "@rollup/plugin-terser": "^0.4.4",
-    "@vitejs/plugin-vue-jsx": "^3.0.2",
-    "commitizen": "^4.3.0",
-    "execa": "^8.0.1",
     "less": "^4.2.0",
-    "prettier": "^3.0.3",
     "vue": "^3.3.4"
   },
   "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.4",
     "@vitejs/plugin-vue": "^4.2.3",
+    "@vitejs/plugin-vue-jsx": "^3.0.2",
+    "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
+    "execa": "^8.0.1",
+    "prettier": "^3.0.3",
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
     "vue-tsc": "^1.8.19"
