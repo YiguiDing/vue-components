@@ -1,0 +1,36 @@
+{
+  "name": "vue-compoments",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    ".": "./",
+    "./components": "./src/components",
+    "./layouts": "./src/layouts"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview",
+    "commitizen_init": "commitizen init cz-conventional-changelog --save --save-exact",
+    "commit": "git cz"
+  },
+  "dependencies": {
+    "commitizen": "^4.3.0",
+    "less": "^4.2.0",
+    "prettier": "^3.0.3",
+    "vue": "^3.3.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.2.3",
+    "cz-conventional-changelog": "^3.3.0",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5",
+    "vue-tsc": "^1.8.5"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
