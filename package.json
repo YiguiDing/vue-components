@@ -1,12 +1,14 @@
 {
   "name": "vue-compoments",
   "private": true,
+  "author": "Yigui-Ding",
+  "homepage": "https://dingdingdang.online",
   "version": "0.0.0",
   "type": "module",
   "exports": {
     ".": "./",
-    "./components": "./src/components",
-    "./layouts": "./src/layouts"
+    "./components": "./src/components/index.ts",
+    "./layouts": "./src/layouts/index.ts"
   },
   "scripts": {
     "dev": "vite",
