@@ -23,11 +23,13 @@
     "preview": "vite preview",
     "build:lib": "npm run build:es && npm run build:dts",
     "build:es": "vite build --emptyOutDir --config ./scripts/build.es.ts",
+    "-build:dts-": "vite build --emptyOutDir --config ./scripts/build.dts.ts",
     "build:dts": "vue-tsc --declaration --emitDeclarationOnly -p tsconfig.build.json",
     "commitizen_init": "commitizen init cz-conventional-changelog --save --save-exact",
     "commit": "git cz"
   },
   "dependencies": {
+    "dayjs": "^1.11.10",
     "less": "^4.2.0",
     "vue": "^3.3.4"
   },

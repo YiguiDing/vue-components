@@ -1,9 +1,13 @@
 <script setup lang="ts">
-import WaterFlowLayout from "./layouts/WaterFlowLayout.vue";
+import { Calendar } from "./components";
+import { WaterFlowLayout } from "./layouts";
 </script>
 
 <template>
   <div class="wrapper">
+    <h2>Calendar:</h2>
+    <Calendar />
+    <h2>WaterFlowLayout:</h2>
     <WaterFlowLayout
       class="container"
       :testing="true"
