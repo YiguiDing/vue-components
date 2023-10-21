@@ -121,9 +121,9 @@ function refresh() {
     childNode.style.top = top + "px";
     childNode.style.left = left + "px";
     // 把当前元素高度累加进去
-    colHeights[curColIdx] += childNode.scrollHeight;
+    colHeights[curColIdx] += childNode.offsetHeight;
     colEleCnts[curColIdx] += 1;
-    childMaxHightCol = Math.max(childMaxHightCol, top + childNode.scrollHeight + childMarginBottom);
+    childMaxHightCol = Math.max(childMaxHightCol, top + childNode.offsetHeight + childMarginBottom);
   });
   parentHight.value = childMaxHightCol + parentPaddingBot + "px";
 }
