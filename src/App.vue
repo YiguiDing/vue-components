@@ -6,10 +6,10 @@ import { WaterFlowLayout } from "./layouts";
 <template>
   <div class="wrapper">
     <h2>Calendar:</h2>
-    <Calendar />
+    <Calendar class="Calendar" />
     <h2>WaterFlowLayout:</h2>
     <WaterFlowLayout
-      class="container"
+      class="WaterFlowLayout"
       :testing="true"
       :equal-each-margin="true"
       :parent-padding-top="15"
@@ -23,10 +23,18 @@ import { WaterFlowLayout } from "./layouts";
 </template>
 
 <style lang="less">
+@import url(./styles/软萌小果冻.css);
 .wrapper {
   width: 100%;
   height: 100%;
-  .container {
+  .Calendar {
+    font-family: "软萌小果冻";
+    margin: 0 auto;
+    width: fit-content;
+    height: fit-content;
+    border: 1px solid #eee;
+  }
+  .WaterFlowLayout {
     width: 100%;
     height: 100%;
   }

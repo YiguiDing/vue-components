@@ -25,6 +25,7 @@
     "build:es": "vite build --emptyOutDir --config ./scripts/build.es.ts",
     "-build:dts-": "vite build --emptyOutDir --config ./scripts/build.dts.ts",
     "build:dts": "vue-tsc --declaration --emitDeclarationOnly -p tsconfig.build.json",
+    "commitizen_install": "npm install commitizen -D",
     "commitizen_init": "commitizen init cz-conventional-changelog --save --save-exact",
     "commit": "git cz"
   },
