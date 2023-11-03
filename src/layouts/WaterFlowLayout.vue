@@ -127,23 +127,25 @@ function refresh() {
   });
   parentHight.value = childMaxHightCol + parentPaddingBot + "px";
 }
-
-let timer: number | undefined = undefined;
-function delayRefresh() {
-  clearTimeout(timer);
-  setTimeout(() => {
-    requestAnimationFrame(function () {
-      refresh();
-    });
-  }, 100);
+function delayAction(delay: number, action: Function) {
+  let timer: any = null;
+  return function () {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      requestAnimationFrame(() => {
+        action();
+      });
+    }, delay);
+  };
 }
+let delayRefresh = delayAction(100, refresh);
 
 function listenChildRefrushReq() {
   onMounted(() => {
-    parent.value!.addEventListener(jsFluidEvents.Refresh, refresh);
+    parent.value!.addEventListener(jsFluidEvents.Refresh, delayRefresh);
   });
   onBeforeUnmount(() => {
-    parent.value!.removeEventListener(jsFluidEvents.Refresh, refresh);
+    parent.value!.removeEventListener(jsFluidEvents.Refresh, delayRefresh);
   });
 }
 
@@ -197,7 +199,9 @@ onUpdated(delayRefresh);
     left: 100%;
 
     // https://cubic-bezier.com/#.25,0,0,1
-    transition: all cubic-bezier(0.25, 0, 0, 1) 0.5s;
+    transition:
+      left cubic-bezier(0.25, 0, 0, 1) 0.5s,
+      top cubic-bezier(0.25, 0, 0, 1) 0.5s;
 
     &.test-item {
       width: 300px; // 用户自定义,但所有子元素的宽度应当一致
