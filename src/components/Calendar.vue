@@ -232,7 +232,6 @@ if (enabeAutoResize) {
   height: fit-content;
 
   background-color: var(--calendar-primary-color);
-  border: 1px solid var(--calendar-second-color);
   padding-top: calc(1 * var(--brick-box-width));
   padding-bottom: calc(1 * var(--brick-box-width));
   padding-left: calc(4 * var(--brick-box-width));
