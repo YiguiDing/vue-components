@@ -7,6 +7,7 @@ import { WaterFlowLayout } from "./layouts";
   <div class="wrapper">
     <h2>Calendar:</h2>
     <Calendar class="Calendar" />
+    <Calendar class="Calendar" :is-dark="true" />
     <h2>WaterFlowLayout:</h2>
     <WaterFlowLayout
       class="WaterFlowLayout"

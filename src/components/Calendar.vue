@@ -11,6 +11,8 @@ export type CalendarValModel = {
 </script>
 <script setup lang="ts">
 import dayjs from "dayjs";
+import { LayTooltip } from "@layui/layui-vue";
+import "@layui/layui-vue/lib/index.css";
 import { CSSProperties, onMounted, ref, defineModel, watchEffect, onUpdated } from "vue";
 
 const wekMap = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"];
@@ -29,31 +31,24 @@ const monMap = [
   "十二月",
 ];
 const modelValData = defineModel<CalendarValModel>({ required: false, local: true });
-const calendarData = ref<{
+const calendarData = ref({
   // 年数
-  fullYear: number;
+  fullYear: 0,
   // bricksDiv的列数
-  bricksDivColNum: number;
+  bricksDivColNum: 0,
   // calendarDiv的列数
-  calendarDivColNum: number;
+  calendarDivColNum: 0,
   // 前缀占位符个数
-  prefixWiteSpaceNum: number;
+  prefixWiteSpaceNum: 0,
   // 后缀占位符个数
-  suffixWiteSpaceNum: number;
-  map: Map<
+  suffixWiteSpaceNum: 0,
+  map: new Map<
     string,
     {
       date: Date;
       style?: Style;
     }
-  >;
-}>({
-  fullYear: 0,
-  bricksDivColNum: 0,
-  calendarDivColNum: 0,
-  prefixWiteSpaceNum: 0,
-  suffixWiteSpaceNum: 0,
-  map: new Map(),
+  >(),
 });
 
 function loadCalendar(year?: number) {
@@ -113,15 +108,20 @@ function refresh() {
 
 // 执行一次，并在依赖数据更新时自动执行
 watchEffect(refresh);
-
-// ---------------------------------------------autoResize----------------------------------------------------
-let { enableAutoResize: enabeAutoResize } = defineProps({
+// ---------------------------------------------defineProps----------------------------------------------------
+let { enableAutoResize: enabeAutoResize, isDark } = defineProps({
   enableAutoResize: {
     type: Boolean,
+    require: false,
     default: false,
-    required: false,
+  },
+  isDark: {
+    type: Boolean,
+    require: false,
+    default: false,
   },
 });
+
 let calWrpElRef = ref<HTMLElement | undefined>(undefined);
 // 根据父盒子宽度自动重设宽度
 function autoResize() {
@@ -140,7 +140,7 @@ if (enabeAutoResize) {
 </script>
 
 <template>
-  <div class="calendar-wrapper" ref="calWrpElRef">
+  <div class="calendar-wrapper" ref="calWrpElRef" :dark="isDark">
     <div class="calendar">
       <h2 class="titleName" v-if="modelValData?.title">{{ modelValData.title }}</h2>
       <div
@@ -167,7 +167,7 @@ if (enabeAutoResize) {
           <div class="monthName" v-if="val.date.getDate() == 1">
             {{ monMap[val.date.getMonth()] }}
           </div>
-          <lay-tooltip position="bottom" :enterable="false">
+          <LayTooltip position="bottom" :enterable="false" :is-dark="isDark">
             <template v-slot:content>
               <div class="content">
                 <!-- 没有传入值就默认显示日期 -->
@@ -183,7 +183,7 @@ if (enabeAutoResize) {
               <div class="style" :style="val.style"></div>
               <div class="text">{{ val.date.getDate() }}</div>
             </div>
-          </lay-tooltip>
+          </LayTooltip>
         </div>
         <div class="brick" v-for="_idx in calendarData.suffixWiteSpaceNum">
           <!-- 占位符 -->
@@ -204,9 +204,25 @@ if (enabeAutoResize) {
   box-sizing: border-box;
 }
 .calendar-wrapper {
-  --calendar-primary-color: #fff;
-  --calendar-second-color: #eee;
-  --calendar-fnt-color: #000;
+  --calendar-light-primary-color: #fff;
+  --calendar-light-second-color: #eee;
+  --calendar-light-fnt-color: #000;
+
+  --calendar-dark-primary-color: #222;
+  --calendar-dark-second-color: #333;
+  --calendar-dark-fnt-color: #ddd;
+  & {
+    --calendar-primary-color: var(--calendar-light-primary-color);
+    --calendar-second-color: var(--calendar-light-second-color);
+    --calendar-fnt-color: var(--calendar-light-fnt-color);
+  }
+  &[dark="true"] {
+    --calendar-primary-color: var(--calendar-dark-primary-color);
+    --calendar-second-color: var(--calendar-dark-second-color);
+    --calendar-fnt-color: var(--calendar-dark-fnt-color);
+  }
+}
+.calendar-wrapper {
   height: fit-content;
   width: 100%;
   color: var(--calendar-fnt-color);
@@ -346,6 +362,9 @@ if (enabeAutoResize) {
   text-align: center;
   .content {
     .title {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
       line-height: var(--brick-box-width);
       font-size: var(--brick-box-fntsz);
     }
